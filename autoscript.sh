@@ -53,10 +53,8 @@ sudo cp /etc/openvpn/ca.crt ~/client-configs/keys/
 sudo mkdir -p /etc/openvpn/
 sudo wget https://raw.githubusercontent.com/davidfrosty0001/ovpn-port-forward/master/server.conf
 sudo cp server.conf /etc/openvpn/server.conf
-sudo nano /etc/sysctl.conf
-*
-*
-*
+sudo sed -i '28 s/^#//' /etc/sysctl.conf
+
 ip route | grep default
 *
 *
@@ -77,23 +75,16 @@ sudo systemctl start openvpn@server
 sudo systemctl status openvpn@server
 sudo systemctl enable openvpn@server
 mkdir -p ~/client-configs/files
-cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf ~/client-configs/base.conf
-nano ~/client-configs/base.conf
-*
-*
-*
-nano ~/client-configs/make_config.sh
-*
-*
-*
+wget https://raw.githubusercontent.com/davidfrosty0001/ovpn-port-forward/master/base.conf
+cp base.conf ~/client-configs/base.conf
+wget https://raw.githubusercontent.com/davidfrosty0001/ovpn-port-forward/master/make_config.sh
+cp make_config.sh ~/client-configs/make_config.sh
 chmod 700 ~/client-configs/make_config.sh
 cd ~/client-configs
 sudo ./make_config.sh client1
-ls ~/client-configs/files
-
 wget https://raw.githubusercontent.com/davidfrosty0001/ovpn-port-forward/master/ports.py
-python3 ports.py 23 - 49151 both
-
+python3 ports.py 2404 both
+ls ~/client-configs/files
 
 
 
