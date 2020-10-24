@@ -50,13 +50,9 @@ cp pki/issued/client1.crt /tmp
 cp /tmp/client1.crt ~/client-configs/keys/
 cp ~/EasyRSA-3.0.4/ta.key ~/client-configs/keys/
 sudo cp /etc/openvpn/ca.crt ~/client-configs/keys/
-sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
-sudo gzip -d /etc/openvpn/server.conf.gz
-sudo nano /etc/openvpn/server.conf
-wget 
-*
-*
-*
+sudo mkdir -p /etc/openvpn/
+sudo wget https://raw.githubusercontent.com/davidfrosty0001/ovpn-port-forward/master/server.conf
+sudo cp server.conf /etc/openvpn/server.conf
 sudo nano /etc/sysctl.conf
 *
 *
