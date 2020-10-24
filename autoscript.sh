@@ -85,6 +85,17 @@ sudo ./make_config.sh client1
 wget https://raw.githubusercontent.com/davidfrosty0001/ovpn-port-forward/master/ports.py
 python3 ports.py 2404 both
 ls ~/client-configs/files
+sudo apt-get install iptables-persistent -y
+iptables-save > /etc/iptables/rules.v4
+iptables-save > /etc/sysconfig/iptables
+touch /etc/iptables.blynk.rules
+echo '#!/bin/sh' > /etc/network/if-up.d/iptables
+echo "iptables-restore < /etc/iptables.blynk.rules" >> /etc/network/if-up.d/iptables
+chmod +x /etc/network/if-up.d/iptables
 
+echo '#!/bin/sh' > /etc/network/if-down.d/iptables
+echo "iptables-save > /etc/iptables.blynk.rules" >> /etc/network/if-down.d/iptables
+chmod +x /etc/network/if-down.d/iptables
 
+service networking restart
 
