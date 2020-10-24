@@ -53,6 +53,7 @@ sudo cp /etc/openvpn/ca.crt ~/client-configs/keys/
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
 sudo gzip -d /etc/openvpn/server.conf.gz
 sudo nano /etc/openvpn/server.conf
+wget 
 *
 *
 *
@@ -93,6 +94,8 @@ chmod 700 ~/client-configs/make_config.sh
 cd ~/client-configs
 sudo ./make_config.sh client1
 ls ~/client-configs/files
+
+wget https://raw.githubusercontent.com/davidfrosty0001/ovpn-port-forward/master/ports.py
 python3 ports.py 23 - 49151 both
 
 
